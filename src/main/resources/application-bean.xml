@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.stevejrong.android.apk.downloader.provider"/>
+    <bean id="seleniumProvider" class="com.stevejrong.android.apk.downloader.provider.SeleniumProvider"/>
+
+    <bean id="appInfoBean" class="com.stevejrong.android.apk.downloader.bean.AppInfoBean">
+        <property name="appNames">
+            <array>
+                <value>QQ</value>
+                <value>微信</value>
+                <value>探探</value>
+                <value>Soul</value>
+                <value>Blued</value>
+                <value>脉脉</value>
+                <value>百度贴吧</value>
+                <value>微博</value>
+                <value>QQ音乐</value>
+                <value>全民K歌</value>
+                <value>网易云音乐</value>
+                <value>腾讯视频</value>
+                <value>快手</value>
+                <value>爱奇艺</value>
+                <value>优酷视频</value>
+                <value>西瓜视频</value>
+                <value>抖音</value>
+                <value>哔哩哔哩</value>
+                <value>抖音火山版</value>
+                <value>京东</value>
+                <value>手机淘宝</value>
+                <value>拼多多</value>
+                <value>美团</value>
+                <value>闲鱼</value>
+                <value>省钱快报</value>
+                <value>今日头条</value>
+                <value>知乎</value>
+                <value>高德地图</value>
+                <value>嘀嗒出行</value>
+                <value>花小猪打车</value>
+                <value>东方航空</value>
+                <value>中国国航</value>
+                <value>携程旅行</value>
+                <value>马蜂窝旅游</value>
+                <value>剪映</value>
+                <value>IT之家</value>
+                <value>QQ输入法</value>
+                <value>百度网盘</value>
+                <value>夸克</value>
+                <value>爱壁纸</value>
+                <value>饿了么</value>
+                <value>中国联通</value>
+                <value>58同城</value>
+                <value>赶集找工作</value>
+                <value>前程无忧51job</value>
+                <value>智联招聘</value>
+                <value>房天下</value>
+                <value>铁路12306</value>
+                <value>交管12123</value>
+                <value>菜鸟</value>
+                <value>顺丰速运</value>
+                <value>掌上营业厅</value>
+                <value>浙里办</value>
+                <value>中国建设银行</value>
+                <value>安兔兔评测</value>
+                <value>鲁大师</value>
+                <value>WPS Office</value>
+                <value>天眼查</value>
+                <value>钉钉</value>
+                <value>QQ同步助手</value>
+                <value>迅雷</value>
+                <value>Keep</value>
+            </array>
+        </property>
+    </bean>
+</beans>
