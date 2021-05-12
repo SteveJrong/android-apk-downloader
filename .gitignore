@@ -25,6 +25,5 @@ temp/
 *.iml
 # 忽略Gradle生成的多余脚本
 gradlew
-*.bat
 # 忽略macOS下的多余文件
 .DS_Store
