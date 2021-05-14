@@ -1,15 +1,15 @@
 package com.stevejrong.android.apk.downloader.boot;
 
-import com.stevejrong.android.apk.downloader.provider.SeleniumProvider;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
+import com.stevejrong.android.apk.downloader.util.QueueUtil;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class AndroidApkDownloaderApplication {
-
-    public static void main(String[] args) throws InterruptedException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-bean.xml");
-
-        SeleniumProvider seleniumProvider = (SeleniumProvider) context.getBean("seleniumProvider");
-        seleniumProvider.action();
+    public static void main(String[] args) {
+        for (IAppDownload appDownloadSite : QueueUtil.APP_DOWNLOAD_SITES_QUEUE) {
+            if (CollectionUtils.isNotEmpty(QueueUtil.APP_QUEUE)) {
+                appDownloadSite.automaticDownload();
+            }
+        }
     }
 }
