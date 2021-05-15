@@ -25,11 +25,11 @@
         <property name="browserDownloadPath" value="/Users/stevejrong/Desktop/apks"/>
         <property name="appDownloadSitesConfig">
             <list>
-                <ref bean="anZhiAppDownload"/>
                 <ref bean="tencentAppDownload"/>
+                <ref bean="anZhiAppDownload"/>
             </list>
         </property>
-        <property name="currentAppListNodeName" value="test-app-list"/>
+        <property name="currentAppListNodeName" value="my-app-list"/>
     </bean>
 
     <bean id="anZhiAppDownload" class="com.stevejrong.android.apk.downloader.provider.app.download.appDownload.impl.AnZhiAppDownload">
