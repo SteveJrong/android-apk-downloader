@@ -19,6 +19,7 @@ import com.stevejrong.android.apk.downloader.common.Constants;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.AbstractAppDownload;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 import com.stevejrong.android.apk.downloader.util.QueueUtil;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TencentAppDownload extends AbstractAppDownload implements IAppDownload {
+    private static final Logger LOGGER = Logger.getLogger(TencentAppDownload.class);
+
     public TencentAppDownload(String searchUrl, List<String> htmlAnalysisExpressions) {
         super(searchUrl, htmlAnalysisExpressions);
     }
@@ -44,6 +47,8 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
         LinkedList<String> appQueue = QueueUtil.APP_QUEUE;
 
         for (int i = 0; i < appQueue.size(); i++) {
+            LOGGER.info(String.format("[%s] 开始自动化下载 <%s> ！", this.getClass().getCanonicalName(), appQueue.element()));
+
             try {
                 webDriver.get(super.searchUrl.replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()));
                 Thread.sleep(800);
@@ -52,14 +57,18 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                     webDriver.findElement(By.xpath(htmlAnalysisExpressions.get(j).replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()))).click();
 
                     if (j == 0) {
-                        String firstHandle = webDriver.getWindowHandle();
-                        for (String winHandle : webDriver.getWindowHandles()) {
-                            if (winHandle.equals(firstHandle)) {
-                                continue;
-                            }
+                        try {
+                            String firstHandle = webDriver.getWindowHandle();
+                            for (String winHandle : webDriver.getWindowHandles()) {
+                                if (winHandle.equals(firstHandle)) {
+                                    continue;
+                                }
 
-                            webDriver.switchTo().window(winHandle);
-                            break;
+                                webDriver.switchTo().window(winHandle);
+                                break;
+                            }
+                        } catch (Exception ex) {
+                            LOGGER.error(String.format("[%s] 开启新浏览器选项卡时发生异常。信息：%s", this.getClass().getCanonicalName(), ex.getMessage()));
                         }
                     }
 
@@ -78,17 +87,19 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                                     break;
                                 }
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception ex) {
+                            LOGGER.error(String.format("[%s] 关闭浏览器选项卡时发生异常。信息：%s", this.getClass().getCanonicalName(), ex.getMessage()));
                         }
+
+                        LOGGER.info(String.format("[%s] 自动化下载 <%s> 成功！", this.getClass().getCanonicalName(), appQueue.element()));
                     }
 
                     Thread.sleep(800);
                 }
             } catch (NoSuchElementException ex) {
-                System.out.println(String.format("%s 未搜索到！", appQueue.element()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.warn(String.format("[%s] APP %s 未在当前应用市场搜索到！", this.getClass().getCanonicalName(), appQueue.element()));
+            } catch (Exception ex1) {
+                LOGGER.error(String.format("[%s] 发生其他异常。信息：%s", this.getClass().getCanonicalName(), ex1.getLocalizedMessage()));
             }
         }
     }

@@ -40,7 +40,7 @@ public final class QueueUtil {
     private static DownloadConfig DOWNLOAD_CONFIG;
 
     private static void initAppDownloadSitesQueue() {
-        DOWNLOAD_CONFIG = SpringBeanUtil.getBean("downloadConfig");
+        DOWNLOAD_CONFIG = SpringBeanUtil.getBean(Constants.DOWNLOAD_CONFIG_SPRING_BEAN_ID.val());
 
         List<IAppDownload> appDownloadSites = DOWNLOAD_CONFIG.getAppDownloadSitesConfig();
         APP_DOWNLOAD_SITES_QUEUE.addAll(appDownloadSites);

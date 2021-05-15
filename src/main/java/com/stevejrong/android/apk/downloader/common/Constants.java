@@ -23,7 +23,9 @@ public enum Constants {
     CHROME_PREFERENCE_OPTION("prefs"),
 
     APP_NAME_SYMBOL("#APP_NAME"),
+    DOWNLOAD_CONFIG_SPRING_BEAN_ID("downloadConfig"),
 
+    APK_SUFFIX("apk"),
     APP_LIST_RELATIVE_PATH(File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "app-list.xml"),
     SPRING_XML_FILE_NAME("application-bean.xml");
 

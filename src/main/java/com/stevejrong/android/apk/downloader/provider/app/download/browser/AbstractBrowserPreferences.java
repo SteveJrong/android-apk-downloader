@@ -26,6 +26,6 @@ public class AbstractBrowserPreferences {
 
     static {
         CONTEXT = new ClassPathXmlApplicationContext(Constants.SPRING_XML_FILE_NAME.val());
-        DOWNLOAD_CONFIG = (DownloadConfig) CONTEXT.getBean("downloadConfig");
+        DOWNLOAD_CONFIG = (DownloadConfig) CONTEXT.getBean(Constants.DOWNLOAD_CONFIG_SPRING_BEAN_ID.val());
     }
 }

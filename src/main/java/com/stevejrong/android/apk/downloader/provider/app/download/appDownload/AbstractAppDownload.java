@@ -15,6 +15,7 @@
  */
 package com.stevejrong.android.apk.downloader.provider.app.download.appDownload;
 
+import com.stevejrong.android.apk.downloader.common.Constants;
 import com.stevejrong.android.apk.downloader.config.download.DownloadConfig;
 import com.stevejrong.android.apk.downloader.provider.app.download.browser.IBrowserPreferences;
 import com.stevejrong.android.apk.downloader.util.SpringBeanUtil;
@@ -39,7 +40,7 @@ public abstract class AbstractAppDownload {
      * @return
      */
     protected WebDriver initBrowserPrefsByDefaultConfig() {
-        DOWNLOAD_CONFIG = SpringBeanUtil.getBean("downloadConfig");
+        DOWNLOAD_CONFIG = SpringBeanUtil.getBean(Constants.DOWNLOAD_CONFIG_SPRING_BEAN_ID.val());
 
         IBrowserPreferences browserPreferences = SpringBeanUtil.getBean(DOWNLOAD_CONFIG.getBrowserName());
         return browserPreferences.initBrowserPrefs();

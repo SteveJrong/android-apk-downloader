@@ -1,0 +1,6 @@
+app:
+  download:
+    browserName: googleChrome # 可选值：googleChrome、mozillaFirefox、appleSafari、microsoftEdge、microsoftInternetExplorer
+    browserWebDriverPath: /usr/local/bin/chromedriver
+    browserDownloadPath: /Users/stevejrong/Desktop/apks
+    currentAppListNodeName: test-app-list
