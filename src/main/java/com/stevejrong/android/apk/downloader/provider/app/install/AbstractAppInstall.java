@@ -27,8 +27,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * AbstractClass - APP安装抽象类
+ *
  * @author Steve Jrong
- * create date: 2021-05-15 6:18 PM
+ * create date: 2021-05-15 8:23 PM
  * @since 1.0
  */
 public abstract class AbstractAppInstall {
@@ -39,7 +41,7 @@ public abstract class AbstractAppInstall {
     /**
      * 获取ADB连接对象
      *
-     * @return
+     * @return JadbConnection连接对象
      */
     private JadbConnection getAdbConnection() {
         connection = new JadbConnection();
@@ -49,7 +51,7 @@ public abstract class AbstractAppInstall {
     /**
      * 获取已连接的设备
      *
-     * @return
+     * @return JadbDevice集合
      * @throws IOException
      * @throws JadbException
      */
@@ -76,7 +78,7 @@ public abstract class AbstractAppInstall {
     /**
      * 使用ADB命令安装APP
      *
-     * @param apkFilePath APK应用绝对路径
+     * @param apkFilePath 安卓APP应用程序文件的绝对路径
      */
     protected void installAppWithAdb(String apkFilePath) {
         try {
@@ -86,7 +88,7 @@ public abstract class AbstractAppInstall {
 
             LOGGER.info(String.format("[%s] 自动化安装 <%s> 成功！", this.getClass().getCanonicalName(), apkFilePath));
         } catch (IOException | JadbException ex) {
-            LOGGER.error(String.format("[%s] 自动化安装 <%s> 失败！文件位置：<%s>。异常信息：<%s>。", this.getClass().getCanonicalName(), apkFilePath, ex.getMessage()));
+            LOGGER.error(String.format("[%s] 自动化安装 <%s> 失败！异常信息：<%s>。", this.getClass().getCanonicalName(), apkFilePath, ex.getMessage()));
         }
     }
 }

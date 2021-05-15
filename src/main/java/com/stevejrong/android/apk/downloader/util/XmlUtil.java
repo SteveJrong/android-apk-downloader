@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,13 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Util - XML工具类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public final class XmlUtil {
 
     /**

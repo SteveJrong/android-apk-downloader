@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,17 @@ import com.stevejrong.android.apk.downloader.common.Constants;
 import com.stevejrong.android.apk.downloader.config.download.DownloadConfig;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Util - 队列工具类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public final class QueueUtil {
     public static final LinkedList<IAppDownload> APP_DOWNLOAD_SITES_QUEUE;
     public static final LinkedList<String> APP_QUEUE;
@@ -47,7 +55,8 @@ public final class QueueUtil {
     }
 
     private static void initAppQueue() {
-        List<String> appList = XmlUtil.readToStringList(FileUtil.getProjectAbsolutePath() + Constants.APP_LIST_RELATIVE_PATH.val(),
+        List<String> appList = XmlUtil.readToStringList(FileUtil.getResourcesDirectoryAbsolutePath() + File.separator
+                        + Constants.APP_LIST_XML_FILE_NAME.val(),
                 DOWNLOAD_CONFIG.getCurrentAppListNodeName());
         APP_QUEUE.addAll(appList);
     }

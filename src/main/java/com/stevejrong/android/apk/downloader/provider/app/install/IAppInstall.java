@@ -13,30 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.stevejrong.android.apk.downloader.provider.app.download.appDownload;
-
-import org.openqa.selenium.WebDriver;
+package com.stevejrong.android.apk.downloader.provider.app.install;
 
 /**
- * Service Interface - APP下载业务接口
+ * Interface - APP安装业务接口
  *
  * @author Steve Jrong
- * create date: 2021-05-15 8:23 PM
+ * create date: 2021-05-15 6:14 PM
  * @since 1.0
  */
-public interface IAppDownload {
+public interface IAppInstall {
 
     /**
-     * 浏览器参数及设置初始化
-     *
-     * 此方法实现时不需调用
-     *
-     * @return Selenium的WebDriver对象
+     * 自动安装APP
      */
-    WebDriver initBrowserPrefs();
-
-    /**
-     * 自动化下载
-     */
-    void automaticDownload();
+    void automaticInstall();
 }

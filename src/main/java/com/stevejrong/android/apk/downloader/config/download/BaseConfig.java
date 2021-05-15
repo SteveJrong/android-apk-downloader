@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.stevejrong.android.apk.downloader.logs.provider;
+package com.stevejrong.android.apk.downloader.config.download;
 
 /**
- * 日志业务接口
+ * Configuration - 基础配置类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
  */
-public interface ILogProvider {
+public class BaseConfig {
 
     /**
-     * 方法正常执行后的日志处理
-     *
-     * @param params 可选参数
+     * 欢迎提示语
      */
-    void afterReturnDoAction(Object... params);
+    private String welcomeMessage;
 
-    /**
-     * 方法执行期间出现异常的日志处理
-     *
-     * @param params 可选参数
-     */
-    void afterExceptionDoAction(Object... params);
+    public String getWelcomeMessage() {
+        return welcomeMessage;
+    }
+
+    public void setWelcomeMessage(String welcomeMessage) {
+        this.welcomeMessage = welcomeMessage;
+    }
+
+    public BaseConfig() {
+    }
 }

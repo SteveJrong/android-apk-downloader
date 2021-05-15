@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,13 @@
  */
 package com.stevejrong.android.apk.downloader.common;
 
-import java.io.File;
-
+/**
+ * Constant - 常量类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public enum Constants {
     CHROME_WEB_DRIVER_PACKAGE_NAME("webdriver.chrome.driver"),
     CHROME_DOWNLOAD_DIRECTORY_PREFERENCE_COMMAND("download.default_directory"),
@@ -24,10 +29,15 @@ public enum Constants {
 
     APP_NAME_SYMBOL("#APP_NAME"),
     DOWNLOAD_CONFIG_SPRING_BEAN_ID("downloadConfig"),
+    BASE_CONFIG_SPRING_BEAN_ID("baseConfig"),
+    APP_INSTALL_SPRING_BEAN_ID("appInstall"),
 
     APK_SUFFIX("apk"),
-    APP_LIST_RELATIVE_PATH(File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "app-list.xml"),
-    SPRING_XML_FILE_NAME("application-bean.xml");
+    LOG4J_CONFIG_FILE_NAME("log4j.properties"),
+    APP_LIST_XML_FILE_NAME("app-list.xml"),
+    SPRING_XML_FILE_NAME("application-bean.xml"),
+
+    RESOURCES_DIRECTORY_RELATIVE_PATH("/src/main/resources");
 
     private String val;
 

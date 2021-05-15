@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,13 @@ import com.stevejrong.android.apk.downloader.config.download.DownloadConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * AbstractClass - 浏览器参数设置抽象类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public class AbstractBrowserPreferences {
     protected static final ApplicationContext CONTEXT;
     protected static DownloadConfig DOWNLOAD_CONFIG;

@@ -1,7 +1,5 @@
-package com.stevejrong.android.apk.downloader.config.download;
-
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +13,14 @@ package com.stevejrong.android.apk.downloader.config.download;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.stevejrong.android.apk.downloader.config.download;
+
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 
 import java.util.List;
 
 /**
- * 应用下载相关配置类
+ * Configuration - 应用下载相关配置类
  */
 public class DownloadConfig {
     /**

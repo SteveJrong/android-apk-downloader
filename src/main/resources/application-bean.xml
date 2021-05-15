@@ -2,24 +2,33 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="
         com.stevejrong.android.apk.downloader.config,
         com.stevejrong.android.apk.downloader.provider"/>
     <context:property-placeholder local-override="true" properties-ref="yamlProperties"/>
 
+    <!-- 基础配置Bean -->
+    <bean id="baseConfig" class="com.stevejrong.android.apk.downloader.config.download.BaseConfig">
+        <property name="welcomeMessage" value="
+=============================== 欢迎使用Android APK Downloader =============================== &#x000A;&#x000A;
+输入以下对应数字序号来执行任务：&#x000A;
+1.	自动化下载APP&#x000A;
+2.	自动化安装APP&#x000A;
+0.	退出程序&#x000A;
+        "/>
+    </bean>
+    <!-- 下载配置Bean -->
     <bean id="downloadConfig" class="com.stevejrong.android.apk.downloader.config.download.DownloadConfig">
         <property name="browserName" value="${app.download.browserName}"/>
         <property name="browserWebDriverPath" value="${app.download.browserWebDriverPath}"/>
         <property name="browserDownloadPath" value="${app.download.browserDownloadPath}"/>
         <property name="appDownloadSitesConfig">
             <list>
+                <!-- 下载APP时，会依次调用以下列表中的下载器进行下载。排在第一位的优先级最高，是主应用商店；排在最后一位的优先级最低 -->
                 <ref bean="anZhiAppDownload"/>
                 <ref bean="tencentAppDownload"/>
             </list>
@@ -27,6 +36,7 @@
         <property name="currentAppListNodeName" value="${app.download.currentAppListNodeName}"/>
     </bean>
 
+    <!-- 安智APP应用商店下载器Bean -->
     <bean id="anZhiAppDownload" class="com.stevejrong.android.apk.downloader.provider.app.download.appDownload.impl.AnZhiAppDownload">
         <constructor-arg name="searchUrl" value="http://www.anzhi.com/search.php?keyword=#APP_NAME"/>
         <constructor-arg name="htmlAnalysisExpressions">
@@ -35,6 +45,7 @@
             </list>
         </constructor-arg>
     </bean>
+    <!-- 腾讯应用宝APP应用商店下载器Bean -->
     <bean id="tencentAppDownload" class="com.stevejrong.android.apk.downloader.provider.app.download.appDownload.impl.TencentAppDownload">
         <constructor-arg name="searchUrl" value="https://sj.qq.com/myapp/search.htm?kw=#APP_NAME"/>
         <constructor-arg name="htmlAnalysisExpressions">
@@ -45,14 +56,17 @@
         </constructor-arg>
     </bean>
 
+    <!-- 用于使用Selenium自动化下载时所需要设置的浏览器参数Beans。兼容各大主流浏览器而用 -->
     <bean id="googleChrome" class="com.stevejrong.android.apk.downloader.provider.app.download.browser.impl.GoogleChromePreferences"/>
     <bean id="mozillaFirefox" class="com.stevejrong.android.apk.downloader.provider.app.download.browser.impl.MozillaFirefoxPreferences"/>
     <bean id="appleSafari" class="com.stevejrong.android.apk.downloader.provider.app.download.browser.impl.AppleSafariPreferences"/>
     <bean id="microsoftEdge" class="com.stevejrong.android.apk.downloader.provider.app.download.browser.impl.MicrosoftEdgePreferences"/>
     <bean id="microsoftInternetExplorer" class="com.stevejrong.android.apk.downloader.provider.app.download.browser.impl.MicrosoftInternetExplorerPreferences"/>
 
+    <!-- 使用ADB自动化安装APP的Beans -->
     <bean id="appInstall" class="com.stevejrong.android.apk.downloader.provider.app.install.impl.AppInstallImpl"/>
 
+    <!-- 用于支持项目读取Yml/Yaml配置文件 -->
     <bean id="yamlProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
         <property name="resources" value="classpath:define-config.yml"/>
     </bean>

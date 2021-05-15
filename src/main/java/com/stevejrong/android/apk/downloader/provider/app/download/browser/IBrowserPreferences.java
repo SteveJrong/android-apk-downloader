@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,13 @@ package com.stevejrong.android.apk.downloader.provider.app.download.browser;
 
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Service Interface - 浏览器参数设置业务接口
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public interface IBrowserPreferences {
 
     /**

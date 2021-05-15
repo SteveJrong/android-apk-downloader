@@ -27,7 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Service Implements - APP安装
+ * Service Implements - APP安装业务实现类
  *
  * @author Steve Jrong
  * create date: 2021-05-15 6:16 PM

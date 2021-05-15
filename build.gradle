@@ -37,7 +37,7 @@ tasks.withType(JavaCompile) {
 // 设置项目的资源目录位置
 sourceSets.main.resources.srcDirs = ["src/main/java", "src/main/resources"]
 
-mainClassName = 'com.stevejrong.music.factory.boot.MusicFactoryApplication'
+mainClassName = 'com.stevejrong.android.apk.downloader.boot.AndroidApkDownloaderApplication'
 
 // 设置Jar包属性
 jar {
@@ -48,7 +48,7 @@ jar {
 
     // 生成Jar包的manifest清单属性
     manifest {
-        attributes 'Manifest-Version': 1.1,
+        attributes 'Manifest-Version': 2.0,
                 'Main-Class': 'com.stevejrong.android.apk.downloader.boot.AndroidApkDownloaderApplication'
     }
 }
@@ -75,10 +75,10 @@ dependencies {
     compile("org.dom4j:dom4j:$rootProject.ext.dependencies.dom4jVersion")
     compile("org.apache.commons:commons-lang3:$rootProject.ext.dependencies.commonsLang3Version")
     compile("org.apache.commons:commons-collections4:$rootProject.ext.dependencies.commonsCollections4Version")
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.0.2'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.0.2'
-    implementation group: 'commons-logging', name: 'commons-logging', version: '1.1'
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28'
+    compile("org.apache.logging.log4j:log4j-api:$rootProject.ext.dependencies.log4jApiCoreVersion")
+    compile("org.apache.logging.log4j:log4j-core:$rootProject.ext.dependencies.log4jCoreVersion")
+    compile("commons-logging:commons-logging:$rootProject.ext.dependencies.commonsLoggingVersion")
+    compile("org.yaml:snakeyaml:$rootProject.ext.dependencies.snakeyamlVersion")
 
     testCompile("junit:junit:$rootProject.ext.dependencies.junitVersion")
     testCompile("org.hamcrest:hamcrest-core:$rootProject.ext.dependencies.hamcrestVersion")

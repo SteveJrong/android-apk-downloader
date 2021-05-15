@@ -1,5 +1,6 @@
 package com.stevejrong.android.apk.downloader.test;
 
+import com.stevejrong.android.apk.downloader.common.Constants;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 import com.stevejrong.android.apk.downloader.util.FileUtil;
 import com.stevejrong.android.apk.downloader.util.SpringBeanUtil;
@@ -45,7 +46,8 @@ public class TestCase1 {
     @Test
     public void xmlReadTest() throws DocumentException {
         SAXReader reader = new SAXReader();
-        File file = new File(FileUtil.getProjectAbsolutePath() + "/src/main/resources/app-list.xml");
+        File file = new File(FileUtil.getResourcesDirectoryAbsolutePath() + File.separator
+                + Constants.APP_LIST_XML_FILE_NAME.val());
         Document document = reader.read(file);
         Element root = document.getRootElement();
         List<Element> childElements = root.elements();

@@ -1,6 +1,6 @@
 app:
   download:
-    browserName: googleChrome # 可选值：googleChrome、mozillaFirefox、appleSafari、microsoftEdge、microsoftInternetExplorer
-    browserWebDriverPath: /usr/local/bin/chromedriver
-    browserDownloadPath: /Users/stevejrong/Desktop/apks
-    currentAppListNodeName: test-app-list
+    browserName: googleChrome # 设置下载APP时要使用的浏览器。目前仅支持googleChrome。一般情况保持默认即可。可选值：googleChrome、mozillaFirefox、appleSafari、microsoftEdge、microsoftInternetExplorer
+    browserWebDriverPath: /usr/local/bin/chromedriver # 设置要使用浏览器的Selenium Web Driver文件绝对路径。需要根据实际情况修改Selenium Web Driver文件的位置。
+    browserDownloadPath: /Users/stevejrong/Desktop/apks # 设置浏览器下载APP文件的位置。需要根据实际情况修改要下载到本地磁盘的位置。
+    currentAppListNodeName: my-app-list # 设置要使用APP快速安装列表方案的哪一种进行安装。一般情况保持默认即可。

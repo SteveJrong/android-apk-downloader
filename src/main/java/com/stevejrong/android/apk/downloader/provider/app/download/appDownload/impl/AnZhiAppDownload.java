@@ -27,6 +27,13 @@ import org.openqa.selenium.WebDriver;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Service Implements - 安智APP应用商店下载业务实现类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public class AnZhiAppDownload extends AbstractAppDownload implements IAppDownload {
     private static final Logger LOGGER = Logger.getLogger(AnZhiAppDownload.class);
 

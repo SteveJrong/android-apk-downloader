@@ -1,5 +1,5 @@
 /**
- * Copyright ${YEAR} Steve Jrong
+ * Copyright 2021 Steve Jrong
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,13 @@ import org.openqa.selenium.WebDriver;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Service Implements - 腾讯应用宝APP应用商店下载业务实现类
+ *
+ * @author Steve Jrong
+ * create date: 2021-05-15 8:23 PM
+ * @since 1.0
+ */
 public class TencentAppDownload extends AbstractAppDownload implements IAppDownload {
     private static final Logger LOGGER = Logger.getLogger(TencentAppDownload.class);
 
