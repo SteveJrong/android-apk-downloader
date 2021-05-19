@@ -61,3 +61,4 @@
 * 增加一些常用APP。
 * 发布release版本：2.0.1。
 * 更新master版本为release版本：2.0.1。
+* 增加下一个develop分支：2.0.2。
