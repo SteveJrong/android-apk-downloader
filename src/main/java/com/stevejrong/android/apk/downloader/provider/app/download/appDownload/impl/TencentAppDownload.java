@@ -24,8 +24,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Service Implements - 腾讯应用宝APP应用商店下载业务实现类
@@ -51,14 +52,17 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
         // 浏览器参数初始化
         WebDriver webDriver = this.initBrowserPrefs();
         // APP队列
-        LinkedList<String> appQueue = QueueUtil.APP_QUEUE;
+        Queue<String> appQueue = QueueUtil.APP_QUEUE;
+        // 未搜索到的APP队列
+        Queue<String> notFoundAppQueue = QueueUtil.NOT_FOUND_APP_QUEUE;
 
-        for (int i = 0; i < appQueue.size(); i++) {
+        Iterator<String> iterator = appQueue.iterator();
+        while (iterator.hasNext()) {
             LOGGER.info(String.format("[%s] 开始自动化下载 <%s> ！", this.getClass().getCanonicalName(), appQueue.element()));
 
             try {
                 webDriver.get(super.searchUrl.replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()));
-                Thread.sleep(800);
+                Thread.sleep(1000);
 
                 for (int j = 0; j < super.htmlAnalysisExpressions.size(); j++) {
                     webDriver.findElement(By.xpath(htmlAnalysisExpressions.get(j).replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()))).click();
@@ -80,8 +84,6 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                     }
 
                     if (j == 1) {
-                        QueueUtil.APP_QUEUE.poll();
-
                         try {
                             String winHandleBefore = webDriver.getWindowHandle(); //关闭当前窗口前，获取当前窗口句柄
 
@@ -101,12 +103,17 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                         LOGGER.info(String.format("[%s] 自动化下载 <%s> 成功！", this.getClass().getCanonicalName(), appQueue.element()));
                     }
 
-                    Thread.sleep(800);
+                    Thread.sleep(1000);
                 }
             } catch (NoSuchElementException ex) {
                 LOGGER.warn(String.format("[%s] APP %s 未在当前应用市场搜索到！", this.getClass().getCanonicalName(), appQueue.element()));
+
+                notFoundAppQueue.add(appQueue.element());
             } catch (Exception ex1) {
                 LOGGER.error(String.format("[%s] 发生其他异常。信息：%s", this.getClass().getCanonicalName(), ex1.getLocalizedMessage()));
+            } finally {
+                // 无论正常下载还是发生异常，均出队
+                QueueUtil.APP_QUEUE.poll();
             }
         }
     }

@@ -57,6 +57,7 @@
         <app-name>东方航空</app-name>
         <app-name>中国国航</app-name>
         <app-name>携程旅行</app-name>
+        <app-name>去哪儿旅行</app-name>
         <app-name>马蜂窝旅游</app-name>
         <app-name>剪映</app-name>
         <app-name>IT之家</app-name>
@@ -64,6 +65,8 @@
         <app-name>百度网盘</app-name>
         <app-name>夸克</app-name>
         <app-name>爱壁纸</app-name>
+        <app-name>锤子便签</app-name>
+        <app-name>CellularZ</app-name>
         <app-name>饿了么</app-name>
         <app-name>中国联通</app-name>
         <app-name>58同城</app-name>
@@ -77,6 +80,7 @@
         <app-name>顺丰速运</app-name>
         <app-name>飞猪</app-name>
         <app-name>蜻蜓FM</app-name>
+        <app-name>喜马拉雅</app-name>
         <app-name>掌上营业厅</app-name>
         <app-name>浙里办</app-name>
         <app-name>中国建设银行</app-name>
@@ -88,8 +92,10 @@
         <app-name>QQ同步助手</app-name>
         <app-name>迅雷</app-name>
         <app-name>Keep</app-name>
+        <app-name>豌豆荚</app-name>
     </my-app-list>
     <test-app-list>
+        <app-name>脉脉</app-name>
         <app-name>迅雷</app-name>
         <app-name>Keep</app-name>
         <app-name>豌豆荚</app-name>

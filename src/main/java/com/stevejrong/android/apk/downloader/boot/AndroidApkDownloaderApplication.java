@@ -50,6 +50,10 @@ public class AndroidApkDownloaderApplication {
                     for (IAppDownload appDownloadSite : QueueUtil.APP_DOWNLOAD_SITES_QUEUE) {
                         LOGGER.info(String.format("[%s] 开始使用 <%s> 下载器下载APP。", AndroidApkDownloaderApplication.class.getName(), appDownloadSite.getClass().getCanonicalName()));
 
+                        if (CollectionUtils.isNotEmpty(QueueUtil.NOT_FOUND_APP_QUEUE)) {
+                            QueueUtil.APP_QUEUE.addAll(QueueUtil.NOT_FOUND_APP_QUEUE);
+                        }
+
                         if (CollectionUtils.isNotEmpty(QueueUtil.APP_QUEUE)) {
                             appDownloadSite.automaticDownload();
                         }

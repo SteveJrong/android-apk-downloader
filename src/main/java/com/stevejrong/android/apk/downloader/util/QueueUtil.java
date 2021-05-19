@@ -21,8 +21,8 @@ import com.stevejrong.android.apk.downloader.config.download.DownloadConfig;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Util - 队列工具类
@@ -32,14 +32,15 @@ import java.util.List;
  * @since 1.0
  */
 public final class QueueUtil {
-    public static final LinkedList<IAppDownload> APP_DOWNLOAD_SITES_QUEUE;
-    public static final LinkedList<String> APP_QUEUE;
+    public static final Queue<IAppDownload> APP_DOWNLOAD_SITES_QUEUE;
+    public static final Queue<String> APP_QUEUE, NOT_FOUND_APP_QUEUE;
 
     static {
         DOWNLOAD_CONFIG = null;
 
         APP_DOWNLOAD_SITES_QUEUE = Lists.newLinkedList();
         APP_QUEUE = Lists.newLinkedList();
+        NOT_FOUND_APP_QUEUE = Lists.newLinkedList();
 
         initAppDownloadSitesQueue();
         initAppQueue();

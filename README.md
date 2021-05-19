@@ -55,3 +55,7 @@
 * 发布release版本：2.0.0。
 * 更新master版本为release版本：2.0.0。
 * 增加下一个develop分支：2.0.1。
+
+2021/05/19：
+* 修复下载APP时因APP未搜索到时，当前APP在APP队列中阻塞的Bug。
+* 增加常用APP。
