@@ -60,3 +60,4 @@
 * 修复下载APP时因APP未搜索到时，当前APP在APP队列中阻塞的Bug。
 * 增加一些常用APP。
 * 发布release版本：2.0.1。
+* 更新master版本为release版本：2.0.1。
