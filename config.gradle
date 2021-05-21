@@ -5,7 +5,7 @@ ext {
     project = [
             groupName     : "com.stevejrong",
             projectName   : "android-apk-downloader",
-            projectVersion: "2.0.1"
+            projectVersion: "2.0.1-SNAPSHOT"
     ]
 
     dependencies = [
