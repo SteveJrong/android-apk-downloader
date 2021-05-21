@@ -4,6 +4,8 @@ import com.stevejrong.android.apk.downloader.common.Constants;
 import com.stevejrong.android.apk.downloader.provider.app.download.appDownload.IAppDownload;
 import com.stevejrong.android.apk.downloader.util.FileUtil;
 import com.stevejrong.android.apk.downloader.util.SpringBeanUtil;
+import net.dongliu.apk.parser.ApkFile;
+import net.dongliu.apk.parser.bean.ApkMeta;
 import org.apache.commons.collections4.CollectionUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -67,5 +69,12 @@ public class TestCase1 {
         IAppDownload tencentAppDownload = SpringBeanUtil.getBean("tencentAppDownload");
         tencentAppDownload.initBrowserPrefs();
         tencentAppDownload.automaticDownload();
+    }
+
+    @Test
+    public void apkInfoTest() throws IOException {
+        ApkFile apkFile = new ApkFile("/Users/stevejrong/Desktop/apks/c7663d738092160700a3f34574342d7d_76668300.apk");
+        ApkMeta apkMeta = apkFile.getApkMeta();
+        System.out.println(apkMeta.getPackageName());
     }
 }

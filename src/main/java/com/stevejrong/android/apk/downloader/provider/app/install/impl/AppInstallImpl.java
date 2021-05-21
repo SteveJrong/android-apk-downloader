@@ -42,16 +42,31 @@ public class AppInstallImpl extends AbstractAppInstall implements IAppInstall {
     public void automaticInstall() {
         DOWNLOAD_CONFIG = SpringBeanUtil.getBean(Constants.DOWNLOAD_CONFIG_SPRING_BEAN_ID.val());
 
-        if (super.checkConnectDevices()) {
-            try {
-                Files.newDirectoryStream(Paths.get(DOWNLOAD_CONFIG.getBrowserDownloadPath()),
-                        path -> path.toString().endsWith(Constants.APK_SUFFIX.val()))
-                        .forEach(file -> super.installAppWithAdb(file.toAbsolutePath().toString()));
-            } catch (IOException ex) {
-                LOGGER.error(String.format("[%s] 发生其他异常。信息：%s", this.getClass().getCanonicalName(), ex.getMessage()));
-            }
-        } else {
-            LOGGER.error(String.format("[%s] ADB连接异常，未检测到连接的设备。请检查设备是否开启USB调试模式、电脑端口是否开放、杀毒软件是否拦截、其他进程是否占用等。", this.getClass().getCanonicalName()));
+        try {
+            Files.newDirectoryStream(Paths.get(DOWNLOAD_CONFIG.getBrowserDownloadPath()),
+                    path -> path.toString().endsWith(Constants.APK_SUFFIX.val()))
+                    .forEach(file -> {
+                        String apkFilePath = file.toAbsolutePath().toString();
+
+                        super.checkConnectDevices();
+                        LOGGER.info(String.format("检测连接状态成功！准备安装APK文件：<%s>", apkFilePath));
+
+                        if (super.checkAlreadyInstalledForApp(apkFilePath)) {
+                            LOGGER.info(String.format("APK文件：<%s> 已安装，跳过安装", apkFilePath));
+                        } else {
+                            try {
+                                LOGGER.info(String.format("开始安装 >>>>>>>> APK文件：<%s>", apkFilePath));
+
+                                super.installAppWithAdb(apkFilePath);
+
+                                LOGGER.info(String.format("安装成功！ >>>>>>>> APK文件：<%s>", apkFilePath));
+                            } catch (Exception ex1) {
+                                LOGGER.error(String.format("自动安装APP期间发生异常。异常信息：%s", ex1.getMessage()));
+                            }
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -68,6 +68,7 @@ dependencies {
 
     compile("org.seleniumhq.selenium:selenium-java:$rootProject.ext.dependencies.seleniumVersion")
     compile("com.github.vidstige:jadb:$rootProject.ext.dependencies.jadbVersion")
+    compile("net.dongliu:apk-parser:$rootProject.ext.dependencies.apkParserVersion")
 
     compile("com.alibaba:fastjson:$rootProject.ext.dependencies.fastjsonVersion")
     compile("com.squareup.okhttp3:okhttp:$rootProject.ext.dependencies.okHttpVersion")

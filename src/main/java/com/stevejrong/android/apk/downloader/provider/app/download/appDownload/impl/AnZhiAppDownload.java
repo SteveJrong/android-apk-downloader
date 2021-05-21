@@ -63,7 +63,7 @@ public class AnZhiAppDownload extends AbstractAppDownload implements IAppDownloa
 
         Iterator<String> iterator = appQueue.iterator();
         while (iterator.hasNext()) {
-            LOGGER.info(String.format("[%s] 开始自动化下载 <%s> ！", this.getClass().getCanonicalName(), appQueue.element()));
+            LOGGER.info(String.format("开始自动化下载 <%s> ！", appQueue.element()));
 
             try {
                 webDriver.get(super.searchUrl.replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()));
@@ -72,13 +72,13 @@ public class AnZhiAppDownload extends AbstractAppDownload implements IAppDownloa
                 for (String htmlAnalysisExp : super.htmlAnalysisExpressions) {
                     webDriver.findElement(By.xpath(htmlAnalysisExp.replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()))).click();
                 }
-                LOGGER.info(String.format("[%s] 自动化下载 <%s> 成功！", this.getClass().getCanonicalName(), appQueue.element()));
+                LOGGER.info(String.format("自动化下载 <%s> 成功！", appQueue.element()));
             } catch (NoSuchElementException ex) {
-                LOGGER.warn(String.format("[%s] APP <%s> 未在当前应用市场搜索到！", this.getClass().getCanonicalName(), appQueue.element()));
+                LOGGER.warn(String.format("APP <%s> 未在当前应用市场搜索到！", appQueue.element()));
 
                 notFoundAppQueue.add(appQueue.element());
             } catch (Exception ex1) {
-                LOGGER.error(String.format("[%s] 发生其他异常。信息：%s", this.getClass().getCanonicalName(), ex1.getMessage()));
+                LOGGER.error(String.format("发生其他异常。信息：%s", ex1.getMessage()));
             } finally {
                 // 无论正常下载还是发生异常，均出队
                 QueueUtil.APP_QUEUE.poll();

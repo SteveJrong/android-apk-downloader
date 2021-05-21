@@ -26,7 +26,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * create date: 2021-05-15 8:23 PM
  * @since 1.0
  */
-public class SpringBeanUtil {
+public final class SpringBeanUtil {
     private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Constants.SPRING_XML_FILE_NAME.val());
 
     /**

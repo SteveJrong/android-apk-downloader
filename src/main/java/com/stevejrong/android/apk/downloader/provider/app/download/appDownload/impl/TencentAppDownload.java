@@ -58,7 +58,7 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
 
         Iterator<String> iterator = appQueue.iterator();
         while (iterator.hasNext()) {
-            LOGGER.info(String.format("[%s] 开始自动化下载 <%s> ！", this.getClass().getCanonicalName(), appQueue.element()));
+            LOGGER.info(String.format("开始自动化下载 <%s> ！", appQueue.element()));
 
             try {
                 webDriver.get(super.searchUrl.replace(Constants.APP_NAME_SYMBOL.val(), appQueue.element()));
@@ -79,7 +79,7 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                                 break;
                             }
                         } catch (Exception ex) {
-                            LOGGER.error(String.format("[%s] 开启新浏览器选项卡时发生异常。信息：%s", this.getClass().getCanonicalName(), ex.getMessage()));
+                            LOGGER.error(String.format("开启新浏览器选项卡时发生异常。信息：%s", ex.getMessage()));
                         }
                     }
 
@@ -97,20 +97,20 @@ public class TencentAppDownload extends AbstractAppDownload implements IAppDownl
                                 }
                             }
                         } catch (Exception ex) {
-                            LOGGER.error(String.format("[%s] 关闭浏览器选项卡时发生异常。信息：%s", this.getClass().getCanonicalName(), ex.getMessage()));
+                            LOGGER.error(String.format("关闭浏览器选项卡时发生异常。信息：%s", ex.getMessage()));
                         }
 
-                        LOGGER.info(String.format("[%s] 自动化下载 <%s> 成功！", this.getClass().getCanonicalName(), appQueue.element()));
+                        LOGGER.info(String.format("自动化下载 <%s> 成功！", appQueue.element()));
                     }
 
                     Thread.sleep(1000);
                 }
             } catch (NoSuchElementException ex) {
-                LOGGER.warn(String.format("[%s] APP %s 未在当前应用市场搜索到！", this.getClass().getCanonicalName(), appQueue.element()));
+                LOGGER.warn(String.format("APP %s 未在当前应用市场搜索到！", appQueue.element()));
 
                 notFoundAppQueue.add(appQueue.element());
             } catch (Exception ex1) {
-                LOGGER.error(String.format("[%s] 发生其他异常。信息：%s", this.getClass().getCanonicalName(), ex1.getLocalizedMessage()));
+                LOGGER.error(String.format("发生其他异常。信息：%s", ex1.getLocalizedMessage()));
             } finally {
                 // 无论正常下载还是发生异常，均出队
                 QueueUtil.APP_QUEUE.poll();

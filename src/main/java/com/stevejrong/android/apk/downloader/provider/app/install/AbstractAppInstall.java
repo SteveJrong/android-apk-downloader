@@ -15,7 +15,14 @@
  */
 package com.stevejrong.android.apk.downloader.provider.app.install;
 
+import com.stevejrong.android.apk.downloader.exception.install.DeviceConnectedFailedException;
+import com.stevejrong.android.apk.downloader.exception.install.InstallAppFailedException;
+import com.stevejrong.android.apk.downloader.exception.install.SearchAppFailedOnDeviceException;
+import com.stevejrong.android.apk.downloader.exception.install.SearchNotFoundForAppOnDeviceException;
+import com.stevejrong.android.apk.downloader.util.ADBUtil;
+import com.stevejrong.android.apk.downloader.util.ApkUtil;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import se.vidstige.jadb.JadbConnection;
 import se.vidstige.jadb.JadbDevice;
@@ -36,7 +43,8 @@ import java.util.List;
 public abstract class AbstractAppInstall {
     private static final Logger LOGGER = Logger.getLogger(AbstractAppInstall.class);
 
-    protected static JadbConnection connection;
+    private static JadbConnection connection;
+    private static PackageManager packageManager;
 
     /**
      * 获取ADB连接对象
@@ -60,16 +68,31 @@ public abstract class AbstractAppInstall {
     }
 
     /**
+     * 获取PackageManager对象
+     *
+     * @return PackageManager对象
+     * @throws IOException
+     * @throws JadbException
+     */
+    private PackageManager getPackageManager() throws IOException, JadbException {
+        if (packageManager == null) {
+            packageManager = new PackageManager(getDevices().get(0));
+        }
+
+        return packageManager;
+    }
+
+    /**
      * 检查是否存在连接好的设备
      *
      * @return true-已连接好至少一台设备；false-未连接任何设备或连接失败
      */
-    protected boolean checkConnectDevices() {
-        List<JadbDevice> devices = null;
+    protected boolean checkConnectDevices() throws DeviceConnectedFailedException {
+        List<JadbDevice> devices;
         try {
             devices = getDevices();
         } catch (IOException | JadbException e) {
-            e.printStackTrace();
+            throw new DeviceConnectedFailedException();
         }
 
         return CollectionUtils.isNotEmpty(devices);
@@ -80,15 +103,41 @@ public abstract class AbstractAppInstall {
      *
      * @param apkFilePath 安卓APP应用程序文件的绝对路径
      */
-    protected void installAppWithAdb(String apkFilePath) {
+    protected void installAppWithAdb(String apkFilePath) throws DeviceConnectedFailedException, InstallAppFailedException {
+
         try {
-            LOGGER.info(String.format("[%s] 开始自动化安装 <%s> ！", this.getClass().getCanonicalName(), apkFilePath));
-
-            new PackageManager(getDevices().get(0)).install(new File(apkFilePath));
-
-            LOGGER.info(String.format("[%s] 自动化安装 <%s> 成功！", this.getClass().getCanonicalName(), apkFilePath));
-        } catch (IOException | JadbException ex) {
-            LOGGER.error(String.format("[%s] 自动化安装 <%s> 失败！异常信息：<%s>。", this.getClass().getCanonicalName(), apkFilePath, ex.getMessage()));
+            File apkFile = new File(apkFilePath);
+            getPackageManager().install(apkFile);
+        } catch (IOException | JadbException ex1) {
+            throw new DeviceConnectedFailedException();
+        } catch (Exception ex2) {
+            throw new InstallAppFailedException(apkFilePath);
         }
+    }
+
+    /**
+     * 检查手机中是否已安装了将要安装的安卓APP应用程序
+     *
+     * @param apkFilePath
+     * @return true-已安装目标APP应用程序；false-未安装目标APP应用程序
+     */
+    protected boolean checkAlreadyInstalledForApp(String apkFilePath) throws SearchAppFailedOnDeviceException, DeviceConnectedFailedException {
+        // 要按装的APK文件的完整包名
+        String apkFullPackageName = ApkUtil.getApkFullPackageName(apkFilePath);
+
+        // 向设备发送ADB命令检测是否已安装
+        String installedAppFullPackageName;
+        try {
+            installedAppFullPackageName = ADBUtil.searchAppOnDeviceByApkFullPackageName(getDevices().get(0), apkFullPackageName);
+        } catch (SearchAppFailedOnDeviceException ex1) {
+            throw new SearchAppFailedOnDeviceException();
+        } catch (SearchNotFoundForAppOnDeviceException ex2) {
+            return false;
+        } catch (IOException | JadbException ex3) {
+            throw new DeviceConnectedFailedException();
+        }
+
+        // 表示APK已安装
+        return StringUtils.isNotEmpty(installedAppFullPackageName) & StringUtils.isNotBlank(installedAppFullPackageName);
     }
 }
