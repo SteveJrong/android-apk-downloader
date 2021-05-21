@@ -34,14 +34,17 @@
         <app-name>淘宝特价版</app-name>
         <app-name>支付宝</app-name>
         <app-name>闲鱼</app-name>
+        <app-name>阿里巴巴</app-name>
         <app-name>京东</app-name>
         <app-name>拼多多</app-name>
         <app-name>美团</app-name>
         <app-name>饿了么</app-name>
         <app-name>转转</app-name>
+        <app-name>找靓机</app-name>
         <app-name>省钱达人</app-name>
         <app-name>省钱快报</app-name>
         <app-name>唯品会</app-name>
+        <app-name>得物(毒)</app-name>
 
         <app-name>高德地图</app-name>
         <app-name>滴滴出行</app-name>
@@ -54,14 +57,13 @@
         <app-name>去哪儿旅行</app-name>
         <app-name>马蜂窝旅游</app-name>
 
-        <app-name>剪映</app-name>
-
         <app-name>QQ输入法</app-name>
         <app-name>百度网盘</app-name>
         <app-name>夸克</app-name>
         <app-name>爱壁纸</app-name>
         <app-name>锤子便签</app-name>
         <app-name>CellularZ</app-name>
+        <app-name>剪映</app-name>
 
         <app-name>58同城</app-name>
         <app-name>Boss直聘</app-name>
@@ -81,6 +83,9 @@
         <app-name>健康山西</app-name>
         <app-name>中国建设银行</app-name>
         <app-name>房天下</app-name>
+        <app-name>美丽修行</app-name>
+        <app-name>盖得排行</app-name>
+        <app-name>小红书</app-name>
         <app-name>安兔兔评测</app-name>
         <app-name>鲁大师</app-name>
         <app-name>天眼查</app-name>
